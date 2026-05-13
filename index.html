@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadangan Matan BNP 2027 – Masyarakat Orang Asli Pahang</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0a2463;
+  --primary-light: #1e3a7a;
+  --accent: #d4a843;
+  --accent-light: #f0d68a;
+  --bg: #f4f6fb;
+  --card-bg: #ffffff;
+  --text: #1a1a2e;
+  --text-light: #555;
+  --green: #27ae60;
+  --green-light: #eafaf1;
+  --blue-light: #e8f0fe;
+  --orange: #e67e22;
+  --red: #e74c3c;
+  --border: #e0e4ed;
+  --shadow: 0 2px 12px rgba(10,36,99,0.08);
+  --shadow-lg: 0 8px 32px rgba(10,36,99,0.12);
+  --radius: 12px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Poppins',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #2d4a8a 100%);
+  color:#fff; padding:28px 20px 22px; text-align:center;
+  position:sticky; top:0; z-index:100;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.header h1 { font-size:1.1rem; font-weight:700; letter-spacing:0.5px; margin-bottom:4px; }
+.header h2 { font-size:0.82rem; font-weight:400; opacity:0.9; margin-bottom:8px; }
+.header .badge-oraco {
+  display:inline-block; background:var(--accent); color:var(--primary);
+  padding:4px 16px; border-radius:20px; font-size:0.7rem; font-weight:600;
+  margin-top:4px;
+}
+.header .motto {
+  font-size:0.65rem; opacity:0.7; margin-top:8px; letter-spacing:1px;
+}
+
+/* SUMMARY CARDS */
+.summary { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:16px; max-width:900px; margin:0 auto; }
+.summary-card {
+  background:var(--card-bg); border-radius:var(--radius); padding:18px 14px;
+  text-align:center; box-shadow:var(--shadow); border-top:3px solid var(--accent);
+}
+.summary-card .label { font-size:0.7rem; color:var(--text-light); text-transform:uppercase; letter-spacing:1px; font-weight:500; }
+.summary-card .value { font-size:1.5rem; font-weight:800; color:var(--primary); margin-top:4px; }
+.summary-card .value.money { color:var(--green); }
+
+/* BUDGET BREAKDOWN */
+.budget-section { padding:0 16px 16px; max-width:900px; margin:0 auto; }
+.budget-card {
+  background:var(--card-bg); border-radius:var(--radius); padding:20px;
+  box-shadow:var(--shadow);
+}
+.budget-card h3 { font-size:0.85rem; color:var(--primary); margin-bottom:14px; text-align:center; text-transform:uppercase; letter-spacing:1px; }
+.budget-bar-item { margin-bottom:10px; }
+.budget-bar-label { display:flex; justify-content:space-between; font-size:0.7rem; margin-bottom:3px; color:var(--text); font-weight:500; }
+.budget-bar-label span:last-child { color:var(--text-light); }
+.budget-bar { height:22px; background:#eef1f7; border-radius:11px; overflow:hidden; position:relative; }
+.budget-bar-fill {
+  height:100%; border-radius:11px; display:flex; align-items:center; justify-content:flex-end;
+  padding-right:8px; font-size:0.6rem; color:#fff; font-weight:600;
+  transition: width 0.8s ease;
+}
+
+/* SECTION HEADERS */
+.section-header {
+  max-width:900px; margin:20px auto 8px; padding:0 16px;
+}
+.section-header .tag {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 16px; border-radius:8px; font-size:0.75rem; font-weight:600;
+  letter-spacing:0.5px;
+}
+.tag-existing { background:var(--blue-light); color:var(--primary); }
+.tag-new { background:var(--green-light); color:var(--green); }
+.tag-new::before { content:"✦ "; }
+
+/* PROGRAM CARDS (MOBILE) */
+.programs { padding:0 16px 10px; max-width:900px; margin:0 auto; }
+.program-card {
+  background:var(--card-bg); border-radius:var(--radius); margin-bottom:12px;
+  box-shadow:var(--shadow); overflow:hidden;
+  border-left:4px solid var(--primary);
+}
+.program-card.new-program { border-left-color:var(--green); }
+.program-card-header {
+  padding:14px 16px 10px; display:flex; align-items:flex-start; gap:10px;
+}
+.program-num {
+  min-width:32px; height:32px; border-radius:50%;
+  background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center;
+  font-size:0.75rem; font-weight:700; flex-shrink:0;
+}
+.new-program .program-num { background:var(--green); }
+.program-title { font-size:0.82rem; font-weight:600; color:var(--text); line-height:1.4; }
+.program-details { padding:0 16px 14px; }
+.program-meta { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.meta-tag {
+  font-size:0.62rem; padding:3px 8px; border-radius:4px;
+  background:#f0f2f8; color:var(--text-light); font-weight:500;
+}
+.meta-tag.jabatan { background:#e8f0fe; color:#1a56db; }
+.meta-tag.exco { background:#fef3e2; color:#b45309; }
+.program-budget {
+  display:flex; align-items:center; gap:8px; margin-bottom:10px;
+  padding:10px 12px; background:linear-gradient(135deg,#f0fdf4,#e8f5e8);
+  border-radius:8px;
+}
+.program-budget .amount { font-size:1.1rem; font-weight:700; color:var(--green); }
+.program-budget .currency { font-size:0.65rem; color:var(--text-light); font-weight:500; }
+.program-roi {
+  font-size:0.72rem; color:var(--text-light); line-height:1.5;
+  padding:10px 12px; background:#fafbfd; border-radius:8px;
+  border-left:3px solid var(--accent);
+}
+.program-roi strong { color:var(--text); font-weight:600; }
+
+/* DESKTOP TABLE */
+.desktop-table { display:none; max-width:1200px; margin:20px auto; padding:0 16px; }
+.desktop-table table {
+  width:100%; border-collapse:collapse; background:var(--card-bg);
+  border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-lg);
+  font-size:0.75rem;
+}
+.desktop-table thead { background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:#fff; }
+.desktop-table th { padding:14px 12px; text-align:center; font-weight:600; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.5px; }
+.desktop-table td { padding:12px; border-bottom:1px solid var(--border); vertical-align:top; }
+.desktop-table tr:last-child td { border-bottom:none; }
+.desktop-table .row-total { background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:#fff; font-weight:700; }
+.desktop-table .row-total td { border-bottom:none; font-size:0.85rem; }
+.desktop-table .section-row { background:var(--blue-light); }
+.desktop-table .section-row td { font-weight:700; color:var(--primary); font-size:0.78rem; padding:10px 12px; }
+.desktop-table .section-row-new { background:var(--green-light); }
+.desktop-table .section-row-new td { font-weight:700; color:var(--green); font-size:0.78rem; padding:10px 12px; }
+.desktop-table .amount-cell { text-align:right; font-weight:600; color:var(--green); white-space:nowrap; }
+.desktop-table .num-cell { text-align:center; font-weight:600; }
+
+/* TOTAL BAR */
+.total-bar {
+  max-width:900px; margin:10px auto 0; padding:0 16px;
+}
+.total-bar-inner {
+  background:linear-gradient(135deg, var(--primary), var(--primary-light));
+  color:#fff; border-radius:var(--radius); padding:20px;
+  display:flex; justify-content:space-between; align-items:center;
+  box-shadow:var(--shadow-lg);
+}
+.total-bar-inner .total-label { font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; }
+.total-bar-inner .total-amount { font-size:1.6rem; font-weight:800; color:var(--accent-light); }
+
+/* FOOTER */
+.footer {
+  text-align:center; padding:24px 16px 40px; max-width:900px; margin:0 auto;
+}
+.footer p { font-size:0.7rem; color:var(--text-light); margin-bottom:4px; }
+.footer .motto-footer { font-size:0.65rem; color:var(--accent); font-weight:600; letter-spacing:1px; margin-top:10px; }
+
+/* RESPONSIVE */
+@media (min-width: 900px) {
+  .header h1 { font-size:1.4rem; }
+  .header h2 { font-size:1rem; }
+  .summary { grid-template-columns: repeat(4,1fr); }
+  .programs { display:none; }
+  .section-header { display:none; }
+  .desktop-table { display:block; }
+  .total-bar { max-width:1200px; }
+  .budget-section { max-width:1200px; }
+  .footer { max-width:1200px; }
+}
+
+@media print {
+  .header { position:relative; }
+  body { background:#fff; }
+  .program-card, .budget-card, .summary-card { box-shadow:none; border:1px solid #ddd; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>CADANGAN MATAN BANTUAN NEGERI PAHANG (BNP) 2027</h1>
+  <h2>Program Berkaitan Masyarakat Orang Asli Negeri Pahang</h2>
+  <div class="badge-oraco">Dikemukakan oleh: Pahang Orang Asli Corporation (ORACO)</div>
+  <div class="motto">#MajuTerusPahang #Pahang1st</div>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary">
+  <div class="summary-card">
+    <div class="label">Jumlah Program</div>
+    <div class="value">11</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Jumlah Bajet</div>
+    <div class="value money">RM25 Juta</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Program Sedia Ada</div>
+    <div class="value">5</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Program Baharu</div>
+    <div class="value" style="color:var(--green);">6</div>
+  </div>
+</div>
+
+<!-- BUDGET BREAKDOWN -->
+<div class="budget-section">
+  <div class="budget-card">
+    <h3>📊 Pecahan Peruntukan Mengikut Program</h3>
+
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>1. Bakul Makanan OA</span><span>RM3.0J (12%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:12%;background:linear-gradient(90deg,#3b82f6,#2563eb);">12%</div></div>
+    </div>
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>2. Hari Orang Asli Sedunia</span><span>RM0.5J (2%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:2%;background:linear-gradient(90deg,#8b5cf6,#7c3aed);font-size:0;"></div></div>
+    </div>
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>3. e-DOA & Insentif Kecemerlangan</span><span>RM1.5J (6%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:6%;background:linear-gradient(90deg,#f59e0b,#d97706);">6%</div></div>
+    </div>
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>4. ICT – Komputer Riba OA</span><span>RM1.5J (6%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:6%;background:linear-gradient(90deg,#ec4899,#db2777);">6%</div></div>
+    </div>
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>5. Sukan Rakyat Orang Asli</span><span>RM3.0J (12%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:12%;background:linear-gradient(90deg,#14b8a6,#0d9488);">12%</div></div>
+    </div>
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>6. Smartboard SMOA ✦</span><span>RM3.5J (14%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:14%;background:linear-gradient(90deg,#22c55e,#16a34a);">14%</div></div>
+    </div>
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>7. Pelancongan Eko & Warisan Budaya ✦</span><span>RM3.0J (12%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:12%;background:linear-gradient(90deg,#06b6d4,#0891b2);">12%</div></div>
+    </div>
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>8. Tanah Adat & Agropreneur ✦</span><span>RM3.0J (12%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:12%;background:linear-gradient(90deg,#84cc16,#65a30d);">12%</div></div>
+    </div>
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>9. Kesihatan Holistik OA ✦</span><span>RM2.5J (10%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:10%;background:linear-gradient(90deg,#ef4444,#dc2626);">10%</div></div>
+    </div>
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>10. Infrastruktur Kampung OA ✦</span><span>RM2.0J (8%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:8%;background:linear-gradient(90deg,#f97316,#ea580c);">8%</div></div>
+    </div>
+    <div class="budget-bar-item">
+      <div class="budget-bar-label"><span>11. Dana Komuniti & Kepimpinan ✦</span><span>RM1.5J (6%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:6%;background:linear-gradient(90deg,#a855f7,#9333ea);">6%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MOBILE CARDS ============ -->
+
+<!-- SECTION A -->
+<div class="section-header">
+  <div class="tag tag-existing">📌 A. PROGRAM SEDIA ADA (DITERUSKAN & DITAMBAH BAIK)</div>
+</div>
+<div class="programs">
+
+  <!-- 1 -->
+  <div class="program-card">
+    <div class="program-card-header">
+      <div class="program-num">1</div>
+      <div class="program-title">Program Penyerahan Bakul Makanan untuk Masyarakat Orang Asli</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 3,000,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Mengurangkan kadar malnutrisi dan kebuluran dalam kalangan 15,000+ keluarga OA di kawasan pedalaman. Impak sosial tinggi – memenuhi keperluan asas makanan komuniti terpinggir.</div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="program-card">
+    <div class="program-card-header">
+      <div class="program-num">2</div>
+      <div class="program-title">Program Sambutan Hari Orang Asli Sedunia Peringkat Negeri Pahang</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 500,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Mengangkat martabat dan visibiliti budaya Orang Asli di peringkat negeri. Memperkukuh perpaduan kaum dan menarik perhatian pelancong. Sasaran 5,000+ pengunjung.</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="program-card">
+    <div class="program-card-header">
+      <div class="program-num">3</div>
+      <div class="program-title">Pelaksanaan Program e-DOA (Education Demi Orang Asli) dan Program Insentif Kecemerlangan Pelajar Orang Asli</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO / JPNP</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli / EXCO Pendidikan</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 1,500,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Meningkatkan kadar kelulusan SPM pelajar OA sebanyak 15-20%. Memberi insentif kewangan kepada 500+ pelajar cemerlang. Mengurangkan kadar keciciran sekolah.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="program-card">
+    <div class="program-card-header">
+      <div class="program-num">4</div>
+      <div class="program-title">Program Transformasi ICT – Komputer Riba Pelajar Orang Asli (Dana disalurkan kepada Pahang Go)</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO / Pahang Go</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli / EXCO Teknologi</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 1,500,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Membekalkan 1,000+ komputer riba kepada pelajar OA IPT/Tingkatan 6. Merapatkan jurang digital dan meningkatkan daya saing akademik pelajar OA.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="program-card">
+    <div class="program-card-header">
+      <div class="program-num">5</div>
+      <div class="program-title">Aspirasi Pahang1st: Sukan Rakyat Orang Asli</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli / EXCO Belia & Sukan</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 3,000,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Melibatkan 5,000+ atlet OA dari 11 daerah. Menggalakkan gaya hidup sihat, perpaduan dan mengenal pasti bakat sukan peringkat negeri/kebangsaan.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SECTION B -->
+<div class="section-header">
+  <div class="tag tag-new">B. PROGRAM BAHARU 2027</div>
+</div>
+<div class="programs">
+
+  <!-- 6 -->
+  <div class="program-card new-program">
+    <div class="program-card-header">
+      <div class="program-num">6</div>
+      <div class="program-title">Program Smartboard – Peranti Digital untuk 29 Sekolah Murid Orang Asli (SMOA) Negeri Pahang</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO / JPNP / KPM</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli / EXCO Pendidikan</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 3,500,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Melengkapkan kesemua bilik darjah di 29 SMOA dengan smartboard interaktif. Meningkatkan kualiti PdPc, menarik minat pelajar dan merapatkan jurang pendidikan digital luar bandar-bandar. Anggaran 200+ bilik darjah dilengkapi.</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="program-card new-program">
+    <div class="program-card-header">
+      <div class="program-num">7</div>
+      <div class="program-title">Program Pelancongan Eko & Warisan Budaya Orang Asli Pahang</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO / Tourism Pahang</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli / EXCO Pelancongan</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 3,000,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Membangunkan 10 kampung OA terpilih sebagai destinasi eko-pelancongan (homestay, trail hutan, pengalaman budaya). Menjana pendapatan alternatif RM500+ sebulan per keluarga terlibat. Sasaran 10,000 pelancong/tahun.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="program-card new-program">
+    <div class="program-card-header">
+      <div class="program-num">8</div>
+      <div class="program-title">Program Pembangunan Tanah Adat & Agropreneur Orang Asli</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO / JAKOA / Jab. Pertanian</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli / EXCO Pertanian</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 3,000,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Pemetaan dan pengiktirafan tanah adat komuniti OA. Projek pertanian komuniti (madu kelulut, herba, buah-buahan tempatan, agroforestry) melibatkan 500+ keluarga. Sasaran peningkatan pendapatan 30%.</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="program-card new-program">
+    <div class="program-card-header">
+      <div class="program-num">9</div>
+      <div class="program-title">Program Kesihatan & Kesejahteraan Holistik Komuniti Orang Asli</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO / JKN Pahang</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli / EXCO Kesihatan</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 2,500,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Klinik bergerak ke 50+ kampung pedalaman. Program pemakanan, kesihatan mental dan pencegahan penyakit. Integrasi perubatan tradisional OA dengan perubatan moden. Sasaran liputan 20,000+ penduduk OA.</div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="program-card new-program">
+    <div class="program-card-header">
+      <div class="program-num">10</div>
+      <div class="program-title">Program Infrastruktur & Kemudahan Asas Kampung Orang Asli</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO / JKR / JAKOA</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli / EXCO Infrastruktur</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 2,000,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Naik taraf jalan, bekalan air bersih, elektrik dan capaian internet di 20 kampung terpencil. Meningkatkan kualiti hidup dan akses kepada perkhidmatan asas. Manfaat kepada 5,000+ penduduk.</div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="program-card new-program">
+    <div class="program-card-header">
+      <div class="program-num">11</div>
+      <div class="program-title">Dana Pembangunan Komuniti & Kapasiti Kepimpinan Orang Asli</div>
+    </div>
+    <div class="program-details">
+      <div class="program-meta">
+        <span class="meta-tag jabatan">ORACO / JAKOA</span>
+        <span class="meta-tag exco">EXCO Hal Ehwal Orang Asli</span>
+      </div>
+      <div class="program-budget">
+        <div><div class="currency">Peruntukan</div><div class="amount">RM 1,500,000</div></div>
+      </div>
+      <div class="program-roi"><strong>Keberkesanan & Impak:</strong> Geran kecil kepada 50+ persatuan/JKKK kampung OA untuk projek pembangunan sendiri. Latihan kepimpinan, tadbir urus dan keusahawanan untuk 200+ pemimpin komuniti. Memperkasa self-determination masyarakat OA.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ DESKTOP TABLE ============ -->
+<div class="desktop-table">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:4%;">BIL</th>
+        <th style="width:22%;">NAMA PROJEK / PROGRAM</th>
+        <th style="width:12%;">JABATAN</th>
+        <th style="width:14%;">EXCO</th>
+        <th style="width:12%;">JUMLAH PERUNTUKAN (RM)</th>
+        <th style="width:36%;">JANGKAAN KEBERKESANAN / IMPAK / ROI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Section A -->
+      <tr class="section-row"><td colspan="6">📌 A. PROGRAM SEDIA ADA (DITERUSKAN & DITAMBAH BAIK)</td></tr>
+      <tr>
+        <td class="num-cell">1</td>
+        <td>Program Penyerahan Bakul Makanan untuk Masyarakat Orang Asli</td>
+        <td>ORACO</td>
+        <td>EXCO Hal Ehwal Orang Asli</td>
+        <td class="amount-cell">3,000,000</td>
+        <td>Mengurangkan kadar malnutrisi dan kebuluran dalam kalangan 15,000+ keluarga OA di kawasan pedalaman. Impak sosial tinggi – memenuhi keperluan asas makanan komuniti terpinggir.</td>
+      </tr>
+      <tr>
+        <td class="num-cell">2</td>
+        <td>Program Sambutan Hari Orang Asli Sedunia Peringkat Negeri Pahang</td>
+        <td>ORACO</td>
+        <td>EXCO Hal Ehwal Orang Asli</td>
+        <td class="amount-cell">500,000</td>
+        <td>Mengangkat martabat dan visibiliti budaya Orang Asli di peringkat negeri. Memperkukuh perpaduan kaum dan menarik perhatian pelancong. Sasaran 5,000+ pengunjung.</td>
+      </tr>
+      <tr>
+        <td class="num-cell">3</td>
+        <td>Pelaksanaan Program e-DOA (Education Demi Orang Asli) dan Program Insentif Kecemerlangan Pelajar Orang Asli</td>
+        <td>ORACO / JPNP</td>
+        <td>EXCO Hal Ehwal Orang Asli / EXCO Pendidikan</td>
+        <td class="amount-cell">1,500,000</td>
+        <td>Meningkatkan kadar kelulusan SPM pelajar OA sebanyak 15-20%. Memberi insentif kewangan kepada 500+ pelajar cemerlang. Mengurangkan kadar keciciran sekolah.</td>
+      </tr>
+      <tr>
+        <td class="num-cell">4</td>
+        <td>Program Transformasi ICT – Komputer Riba Pelajar Orang Asli (Dana disalurkan kepada Pahang Go)</td>
+        <td>ORACO / Pahang Go</td>
+        <td>EXCO Hal Ehwal Orang Asli / EXCO Teknologi</td>
+        <td class="amount-cell">1,500,000</td>
+        <td>Membekalkan 1,000+ komputer riba kepada pelajar OA IPT/Tingkatan 6. Merapatkan jurang digital dan meningkatkan daya saing akademik pelajar OA.</td>
+      </tr>
+      <tr>
+        <td class="num-cell">5</td>
+        <td>Aspirasi Pahang1st: Sukan Rakyat Orang Asli</td>
+        <td>ORACO</td>
+        <td>EXCO Hal Ehwal Orang Asli / EXCO Belia & Sukan</td>
+        <td class="amount-cell">3,000,000</td>
+        <td>Melibatkan 5,000+ atlet OA dari 11 daerah. Menggalakkan gaya hidup sihat, perpaduan dan mengenal pasti bakat sukan peringkat negeri/kebangsaan.</td>
+      </tr>
+
+      <!-- Section B -->
+      <tr class="section-row-new"><td colspan="6">✦ B. PROGRAM BAHARU 2027</td></tr>
+      <tr>
+        <td class="num-cell">6</td>
+        <td>Program Smartboard – Peranti Digital untuk 29 Sekolah Murid Orang Asli (SMOA) Negeri Pahang</td>
+        <td>ORACO / JPNP / KPM</td>
+        <td>EXCO Hal Ehwal Orang Asli / EXCO Pendidikan</td>
+        <td class="amount-cell">3,500,000</td>
+        <td>Melengkapkan kesemua bilik darjah di 29 SMOA dengan smartboard interaktif. Meningkatkan kualiti PdPc, menarik minat pelajar dan merapatkan jurang pendidikan digital luar bandar-bandar. Anggaran 200+ bilik darjah dilengkapi.</td>
+      </tr>
+      <tr>
+        <td class="num-cell">7</td>
+        <td>Program Pelancongan Eko & Warisan Budaya Orang Asli Pahang</td>
+        <td>ORACO / Tourism Pahang</td>
+        <td>EXCO Hal Ehwal Orang Asli / EXCO Pelancongan</td>
+        <td class="amount-cell">3,000,000</td>
+        <td>Membangunkan 10 kampung OA terpilih sebagai destinasi eko-pelancongan (homestay, trail hutan, pengalaman budaya). Menjana pendapatan alternatif RM500+ sebulan per keluarga terlibat. Sasaran 10,000 pelancong/tahun.</td>
+      </tr>
+      <tr>
+        <td class="num-cell">8</td>
+        <td>Program Pembangunan Tanah Adat & Agropreneur Orang Asli</td>
+        <td>ORACO / JAKOA / Jab. Pertanian</td>
+        <td>EXCO Hal Ehwal Orang Asli / EXCO Pertanian</td>
+        <td class="amount-cell">3,000,000</td>
+        <td>Pemetaan dan pengiktirafan tanah adat komuniti OA. Projek pertanian komuniti (madu kelulut, herba, buah-buahan tempatan, agroforestry) melibatkan 500+ keluarga. Sasaran peningkatan pendapatan 30%.</td>
+      </tr>
+      <tr>
+        <td class="num-cell">9</td>
+        <td>Program Kesihatan & Kesejahteraan Holistik Komuniti Orang Asli</td>
+        <td>ORACO / JKN Pahang</td>
+        <td>EXCO Hal Ehwal Orang Asli / EXCO Kesihatan</td>
+        <td class="amount-cell">2,500,000</td>
+        <td>Klinik bergerak ke 50+ kampung pedalaman. Program pemakanan, kesihatan mental dan pencegahan penyakit. Integrasi perubatan tradisional OA dengan perubatan moden. Sasaran liputan 20,000+ penduduk OA.</td>
+      </tr>
+      <tr>
+        <td class="num-cell">10</td>
+        <td>Program Infrastruktur & Kemudahan Asas Kampung Orang Asli</td>
+        <td>ORACO / JKR / JAKOA</td>
+        <td>EXCO Hal Ehwal Orang Asli / EXCO Infrastruktur</td>
+        <td class="amount-cell">2,000,000</td>
+        <td>Naik taraf jalan, bekalan air bersih, elektrik dan capaian internet di 20 kampung terpencil. Meningkatkan kualiti hidup dan akses kepada perkhidmatan asas. Manfaat kepada 5,000+ penduduk.</td>
+      </tr>
+      <tr>
+        <td class="num-cell">11</td>
+        <td>Dana Pembangunan Komuniti & Kapasiti Kepimpinan Orang Asli</td>
+        <td>ORACO / JAKOA</td>
+        <td>EXCO Hal Ehwal Orang Asli</td>
+        <td class="amount-cell">1,500,000</td>
+        <td>Geran kecil kepada 50+ persatuan/JKKK kampung OA untuk projek pembangunan sendiri. Latihan kepimpinan, tadbir urus dan keusahawanan untuk 200+ pemimpin komuniti. Memperkasa self-determination masyarakat OA.</td>
+      </tr>
+
+      <!-- TOTAL -->
+      <tr class="row-total">
+        <td colspan="4" style="text-align:center;">JUMLAH KESELURUHAN</td>
+        <td style="text-align:right;">25,000,000</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- TOTAL BAR (mobile) -->
+<div class="total-bar">
+  <div class="total-bar-inner">
+    <div class="total-label">Jumlah Keseluruhan</div>
+    <div class="total-amount">RM 25,000,000</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p style="font-weight:600; color:var(--primary); font-size:0.78rem;">Disediakan untuk Penyediaan Ucapan Belanjawan Negeri Pahang 2027</p>
+  <p>Dokumen ini dikemukakan oleh Pahang Orang Asli Corporation (ORACO)</p>
+  <p>kepada Pejabat Kewangan Negeri Pahang</p>
+  <div class="motto-footer">#MajuTerusPahang #Pahang1st</div>
+</div>
+
+</body>
+</html>
